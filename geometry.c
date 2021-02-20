@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-double strtod(const char* string, char** endptr);
-
 int main()
 {
     char str[50];
