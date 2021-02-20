@@ -15,6 +15,7 @@ int main()
 {
     char str[50];
     int i = 0;
+    char circle[] = {'c', 'i', 'r', 'c', 'l', 'e'};
 
     //----------------Заготовка на несколько строк---------------
     // int N;
@@ -32,8 +33,7 @@ int main()
 
     skipthespace(str, &i);
 
-    if (((str[i] == 'c') || (str[i] == 'C')) && ((str[i + 1] == 'i') || (str[i + 1] == 'I')) && ((str[i + 2] == 'R') || (str[i + 2] == 'r')) && ((str[i + 3] == 'c') || (str[i + 3] == 'C'))
-        && ((str[i + 4] == 'l') || (str[i + 4] == 'L')) && ((str[i + 5] == 'e') || (str[i + 5] == 'E')))
+    if (strncmp(&str[i], circle, 6) == 0)
     {
         i = i + 6;
         skipthespace(str, &i);
