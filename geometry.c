@@ -61,7 +61,7 @@ int main()
     i++;
     SkipSpace(str, &i);
 
-    if (isdigit(str[i]) == 0)
+    if ((isdigit(str[i]) == 0) && (str[i] != '-'))
     {
         printf("Ошибка в синтаксисе: Ожидается координата после '('\n");
         return 0;
@@ -81,7 +81,7 @@ int main()
     i = i + LetterAfterFirstCoord - &str[i];
     SkipSpace(str, &i);
 
-    if (isdigit(str[i]) == 0)
+    if ((isdigit(str[i]) == 0) && (str[i] != '-'))
     {
         printf("Ошибка в синтаксисе: Ожидается вторая координата после первой координаты\n");
         return 0;
