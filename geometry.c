@@ -3,30 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-void SkipUntilSpaceOrBracket(char* str, int* i)
-{
-    while ((isspace(str[*i]) == 0) && (str[*i] != ')'))
-    {
-        *i = *i + 1;
-    }
-}
-
-void SkipUntilSpaceOrComma(char* str, int* i)
-{
-    while ((isspace(str[*i]) == 0) && (str[*i] != ','))
-    {
-        *i = *i + 1;
-    }
-}
-
-void SkipUntilSpace(char* str, int* i)
-{
-    while (isspace(str[*i]) == 0)
-    {
-        *i = *i + 1;
-    }
-}
-
 void SkipSpace(char* str, int* i)
 {
     while (isspace(str[*i]))
@@ -45,9 +21,7 @@ void SkipSpaceUntilNewLine(char* str, int* i)
 
 int main()
 {
-    int N;
-    printf("Сколько символов в строке: ?");
-    scanf("%d", &N);
+    int N = 50;
     char str[N];
     int i = 0;
     char circle[] = {"circle"};
@@ -104,7 +78,7 @@ int main()
         return 0;
     }
 
-    SkipUntilSpace(str, &i);
+    i = i + LetterAfterFirstCoord - &str[i];
     SkipSpace(str, &i);
 
     if (isdigit(str[i]) == 0)
@@ -124,7 +98,7 @@ int main()
         return 0;
     }
 
-    SkipUntilSpaceOrComma(str, &i);
+    i = i + LetterAfterSecondCoord - &str[i];
     SkipSpace(str, &i);
 
     if (str[i] != ',')
@@ -153,7 +127,7 @@ int main()
         return 0;
     }
 
-    SkipUntilSpaceOrBracket(str, &i);
+    i = i + LetterAfterRadius - &str[i];
     SkipSpace(str, &i);
 
     if (str[i] != ')')
