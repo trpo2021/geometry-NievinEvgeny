@@ -27,7 +27,7 @@ void SkipUntilSpace(char* str, int* i)
     }
 }
 
-void SkipTheSpace(char* str, int* i)
+void SkipSpace(char* str, int* i)
 {
     while (isspace(str[*i]))
     {
@@ -35,7 +35,7 @@ void SkipTheSpace(char* str, int* i)
     }
 }
 
-void SkipTheSpaceUntilNewLine(char* str, int* i)
+void SkipSpaceUntilNewLine(char* str, int* i)
 {
     while ((isspace(str[*i])) && (str[*i] != '\n'))
     {
@@ -45,34 +45,38 @@ void SkipTheSpaceUntilNewLine(char* str, int* i)
 
 int main()
 {
-    char str[50];
+    int N;
+    printf("Сколько символов в строке: ?");
+    scanf("%d", &N);
+    char str[N];
     int i = 0;
-    char circle[] = {'c', 'i', 'r', 'c', 'l', 'e'};
+    char circle[] = {"circle"};
+    int LengthOfCircle = strlen(circle);
 
     //----------------Заготовка на несколько строк---------------
-    // int N;
+    // int F;
     // int j = 0;
     // printf("Сколько фигур?");
-    // scanf("%d", &N);
-    // char str[50][N]
-    // for (j = 0; j < N; j++)
+    // scanf("%d", &F);
+    // char str[N][F]
+    // for (j = 0; j < F; j++)
     //{
-    //  fgets(str[j], 50, stdin);
+    //  fgets(str[j], N, stdin);
     //}
     //-----------------------------------------------------------
 
-    fgets(str, 50, stdin);
+    fgets(str, N, stdin);
 
-    SkipTheSpace(str, &i);
+    SkipSpace(str, &i);
 
-    if (strncmp(&str[i], circle, 6) != 0)
+    if (strncmp(&str[i], circle, LengthOfCircle) != 0)
     {
         printf("Ошибка в имени фигуры: Ожидается 'circle'\n");
         return 0;
     }
 
-    i = i + 6;
-    SkipTheSpace(str, &i);
+    i = i + LengthOfCircle;
+    SkipSpace(str, &i);
 
     if (str[i] != '(')
     {
@@ -81,7 +85,7 @@ int main()
     }
 
     i++;
-    SkipTheSpace(str, &i);
+    SkipSpace(str, &i);
 
     if (isdigit(str[i]) == 0)
     {
@@ -101,7 +105,7 @@ int main()
     }
 
     SkipUntilSpace(str, &i);
-    SkipTheSpace(str, &i);
+    SkipSpace(str, &i);
 
     if (isdigit(str[i]) == 0)
     {
@@ -121,7 +125,7 @@ int main()
     }
 
     SkipUntilSpaceOrComma(str, &i);
-    SkipTheSpace(str, &i);
+    SkipSpace(str, &i);
 
     if (str[i] != ',')
     {
@@ -130,7 +134,7 @@ int main()
     }
 
     i++;
-    SkipTheSpace(str, &i);
+    SkipSpace(str, &i);
 
     if (isdigit(str[i]) == 0)
     {
@@ -150,7 +154,7 @@ int main()
     }
 
     SkipUntilSpaceOrBracket(str, &i);
-    SkipTheSpace(str, &i);
+    SkipSpace(str, &i);
 
     if (str[i] != ')')
     {
@@ -172,7 +176,7 @@ int main()
         return 0;
     }
 
-    SkipTheSpaceUntilNewLine(str, &i);
+    SkipSpaceUntilNewLine(str, &i);
 
     if (str[i] != '\n')
     {
