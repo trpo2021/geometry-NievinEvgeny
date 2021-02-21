@@ -35,6 +35,14 @@ void SkipTheSpace(char* str, int* i)
     }
 }
 
+void SkipTheSpaceUntilNewLine(char* str, int* i)
+{
+    while ((isspace(str[*i])) && (str[*i] != '\n'))
+    {
+        *i = *i + 1;
+    }
+}
+
 int main()
 {
     char str[50];
@@ -164,7 +172,7 @@ int main()
         return 0;
     }
 
-    SkipTheSpace(str, &i);
+    SkipTheSpaceUntilNewLine(str, &i);
 
     if (str[i] != '\n')
     {
