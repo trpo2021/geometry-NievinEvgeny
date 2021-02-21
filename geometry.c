@@ -155,6 +155,7 @@ int main()
     if (str[i] == '\n')
     {
         printf("Данные введены верно\n");
+        return 0;
     }
 
     if (isspace(str[i]) == 0)
@@ -173,5 +174,6 @@ int main()
     else
     {
         printf("Данные введены верно\n");
+        return 0;
     }
 }
