@@ -93,12 +93,12 @@ int main()
         return 0;
     }
 
-    char* strtodhelper1 = &str[i];
+    char* LetterAfterFirstCoord = &str[i];
     double x = 0;
-    x = strtod(strtodhelper1, &strtodhelper1);
+    x = strtod(LetterAfterFirstCoord, &LetterAfterFirstCoord);
     printf("%f\n", x);
 
-    if (*strtodhelper1 != ' ')
+    if (*LetterAfterFirstCoord != ' ')
     {
         printf("Ошибка в синтаксисе: Ожидается ' ' после первой координаты\n");
         return 0;
@@ -113,12 +113,12 @@ int main()
         return 0;
     }
 
-    char* strtodhelper2 = &str[i];
+    char* LetterAfterSecondCoord = &str[i];
     double y = 0;
-    y = strtod(strtodhelper2, &strtodhelper2);
+    y = strtod(LetterAfterSecondCoord, &LetterAfterSecondCoord);
     printf("%f\n", y);
 
-    if ((*strtodhelper2 != ' ') && (*strtodhelper2 != ','))
+    if ((*LetterAfterSecondCoord != ' ') && (*LetterAfterSecondCoord != ','))
     {
         printf("Ошибка в синтаксисе: Ожидается ' ' или ',' после второй координаты\n");
         return 0;
@@ -142,12 +142,12 @@ int main()
         return 0;
     }
 
-    char* strtodhelper3 = &str[i];
+    char* LetterAfterRadius = &str[i];
     double radius = 0;
-    radius = strtod(strtodhelper3, &strtodhelper3);
+    radius = strtod(LetterAfterRadius, &LetterAfterRadius);
     printf("%f\n", radius);
 
-    if ((*strtodhelper3 != ' ') && (*strtodhelper3 != ')'))
+    if ((*LetterAfterRadius != ' ') && (*LetterAfterRadius != ')'))
     {
         printf("Ошибка в синтаксисе: Ожидается ' ' или ')' после радиуса\n");
         return 0;
