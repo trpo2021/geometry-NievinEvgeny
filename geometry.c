@@ -24,8 +24,8 @@ int main()
     int N = 50;
     char str[N];
     int i = 0;
-    char circle[] = {"circle"};
-    int LengthOfCircle = strlen(circle);
+    char Circle[] = {"circle"};
+    int LengthOfCircle = strlen(Circle);
 
     //----------------Заготовка на несколько строк---------------
     // int F;
@@ -43,7 +43,7 @@ int main()
 
     SkipSpace(str, &i);
 
-    if (strncmp(&str[i], circle, LengthOfCircle) != 0)
+    if (strncmp(&str[i], Circle, LengthOfCircle) != 0)
     {
         printf("Ошибка в имени фигуры: Ожидается 'circle'\n");
         return 0;
@@ -61,15 +61,16 @@ int main()
     i++;
     SkipSpace(str, &i);
 
-    if ((isdigit(str[i]) == 0) && (str[i] != '-'))
+    char* LetterAfterFirstCoord = &str[i];
+    double x = 0;
+    x = strtod(LetterAfterFirstCoord, &LetterAfterFirstCoord);
+
+    if ((x == 0) && (LetterAfterFirstCoord == &str[i]))
     {
         printf("Ошибка в синтаксисе: Ожидается координата после '('\n");
         return 0;
     }
 
-    char* LetterAfterFirstCoord = &str[i];
-    double x = 0;
-    x = strtod(LetterAfterFirstCoord, &LetterAfterFirstCoord);
     printf("%f\n", x);
 
     if (*LetterAfterFirstCoord != ' ')
@@ -81,15 +82,16 @@ int main()
     i = i + LetterAfterFirstCoord - &str[i];
     SkipSpace(str, &i);
 
-    if ((isdigit(str[i]) == 0) && (str[i] != '-'))
+    char* LetterAfterSecondCoord = &str[i];
+    double y = 0;
+    y = strtod(LetterAfterSecondCoord, &LetterAfterSecondCoord);
+
+    if ((y == 0) && (LetterAfterSecondCoord == &str[i]))
     {
         printf("Ошибка в синтаксисе: Ожидается вторая координата после первой координаты\n");
         return 0;
     }
 
-    char* LetterAfterSecondCoord = &str[i];
-    double y = 0;
-    y = strtod(LetterAfterSecondCoord, &LetterAfterSecondCoord);
     printf("%f\n", y);
 
     if ((*LetterAfterSecondCoord != ' ') && (*LetterAfterSecondCoord != ','))
@@ -110,15 +112,22 @@ int main()
     i++;
     SkipSpace(str, &i);
 
-    if (isdigit(str[i]) == 0)
+    char* LetterAfterRadius = &str[i];
+    double radius = 0;
+    radius = strtod(LetterAfterRadius, &LetterAfterRadius);
+
+    if ((radius == 0) && (LetterAfterRadius == &str[i]))
     {
         printf("Ошибка в синтаксисе: Ожидается радиус после ','\n");
         return 0;
     }
 
-    char* LetterAfterRadius = &str[i];
-    double radius = 0;
-    radius = strtod(LetterAfterRadius, &LetterAfterRadius);
+    if (radius < 0)
+    {
+        printf("Ошибка: Радиус не может быть отрицательным\n");
+        return 0;
+    }
+
     printf("%f\n", radius);
 
     if ((*LetterAfterRadius != ' ') && (*LetterAfterRadius != ')'))
