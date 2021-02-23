@@ -113,22 +113,22 @@ int main()
     SkipSpace(str, &i);
 
     char* LetterAfterRadius = &str[i];
-    double radius = 0;
-    radius = strtod(LetterAfterRadius, &LetterAfterRadius);
+    double Radius = 0;
+    Radius = strtod(LetterAfterRadius, &LetterAfterRadius);
 
-    if ((radius == 0) && (LetterAfterRadius == &str[i]))
+    if ((Radius == 0) && (LetterAfterRadius == &str[i]))
     {
         printf("Ошибка в синтаксисе: Ожидается радиус после ','\n");
         return 0;
     }
 
-    if (radius < 0)
+    if (Radius < 0)
     {
         printf("Ошибка: Радиус не может быть отрицательным\n");
         return 0;
     }
 
-    printf("%f\n", radius);
+    printf("%f\n", Radius);
 
     if ((*LetterAfterRadius != ' ') && (*LetterAfterRadius != ')'))
     {
@@ -147,23 +147,11 @@ int main()
 
     i++;
 
-    if (str[i] == '\n')
-    {
-        printf("Данные введены верно\n");
-        return 0;
-    }
+    SkipSpace(str, &i);
 
-    if (isspace(str[i]) == 0)
+    if (str + i != str + strlen(str))
     {
-        printf("Ошибка в синтаксисе: Ожидается 'символ конца строки' после ')'\n");
-        return 0;
-    }
-
-    SkipSpaceUntilNewLine(str, &i);
-
-    if (str[i] != '\n')
-    {
-        printf("Ошибка в синтаксисе: Ожидается 'символ конца строки' после ')'\n");
+        printf("Ошибка в синтаксисе: ожидается 'символ конца строки' после ')'\n");
         return 0;
     }
     else
