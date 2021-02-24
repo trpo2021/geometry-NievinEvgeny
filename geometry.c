@@ -11,14 +11,6 @@ void SkipSpace(char* str, int* i)
     }
 }
 
-void SkipSpaceUntilNewLine(char* str, int* i)
-{
-    while ((isspace(str[*i])) && (str[*i] != '\n'))
-    {
-        *i = *i + 1;
-    }
-}
-
 int main()
 {
     int N = 50;
