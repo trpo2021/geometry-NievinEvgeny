@@ -13,7 +13,7 @@ void SkipSpace(char* str, int* i)
 
 int CorrectWritingCircle(char* str, int* i)
 {
-    int k = 0;
+    int k = -1;
     char Circle[] = {"circle"};
     int LengthOfCircle = strlen(Circle);
     SkipSpace(str, i);
@@ -131,9 +131,10 @@ int CorrectWritingCircle(char* str, int* i)
     }
     else
     {
-        printf("Данные введены верно\n");
+        printf("Данные введены верно, переход к новой строке...\n");
     }
     k++;
+    *i = 0;
     return k;
 }
 
@@ -156,27 +157,21 @@ int main()
     {
         printf("выполнено\n");
     }
-    printf("Считаны строки:\n");
 
     // int CoordXForCircles[N];
     // int CoordYForCircles[N];
     // int RadiusesOfCircles[N];
-
-    //----------------Заготовка на несколько строк---------------
-    // int F;
-    // int j = 0;
-    // printf("Сколько фигур?");
-    // scanf("%d", &F);
-    // char str[N][F]
-    // for (j = 0; j < F; j++)
-    //{
-    //  fgets(str[j], N, stdin);
-    //}
-    //-----------------------------------------------------------
-
-    fgets(str, N, InputData);
-    if ((CheckingForCorrectness = CorrectWritingCircle(str, &i)) == 0)
+    while (1)
     {
-        return 0;
+        estr = fgets(str, N, InputData);
+        if (estr == NULL)
+        {
+            break;
+        }
+        if ((CheckingForCorrectness = CorrectWritingCircle(str, &i)) == -1)
+        {
+            break;
+        }
     }
+    printf("Закрытие файла\n");
 }
