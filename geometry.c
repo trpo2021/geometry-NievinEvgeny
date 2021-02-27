@@ -11,53 +11,36 @@ void SkipSpace(char* str, int* i)
     }
 }
 
-int main()
+int CorrectWritingCircle(char* str, int* i)
 {
-    int N = 50;
-    char str[N];
-    int i = 0;
+    int k = 0;
     char Circle[] = {"circle"};
     int LengthOfCircle = strlen(Circle);
+    SkipSpace(str, i);
 
-    //----------------Заготовка на несколько строк---------------
-    // int F;
-    // int j = 0;
-    // printf("Сколько фигур?");
-    // scanf("%d", &F);
-    // char str[N][F]
-    // for (j = 0; j < F; j++)
-    //{
-    //  fgets(str[j], N, stdin);
-    //}
-    //-----------------------------------------------------------
-
-    fgets(str, N, stdin);
-
-    SkipSpace(str, &i);
-
-    if (strncmp(&str[i], Circle, LengthOfCircle) != 0)
+    if (strncmp(&str[*i], Circle, LengthOfCircle) != 0)
     {
         printf("Ошибка в имени фигуры: Ожидается 'circle'\n");
         return 0;
     }
 
-    i = i + LengthOfCircle;
-    SkipSpace(str, &i);
+    *i = *i + LengthOfCircle;
+    SkipSpace(str, i);
 
-    if (str[i] != '(')
+    if (str[*i] != '(')
     {
         printf("Ошибка в синтаксисе: Ожидается '(' после 'circle'\n");
         return 0;
     }
 
-    i++;
-    SkipSpace(str, &i);
+    *i = *i + 1;
+    SkipSpace(str, i);
 
-    char* LetterAfterFirstCoord = &str[i];
+    char* LetterAfterFirstCoord = &str[*i];
     double x = 0;
     x = strtod(LetterAfterFirstCoord, &LetterAfterFirstCoord);
 
-    if ((x == 0) && (LetterAfterFirstCoord == &str[i]))
+    if ((x == 0) && (LetterAfterFirstCoord == &str[*i]))
     {
         printf("Ошибка в синтаксисе: Ожидается координата после '('\n");
         return 0;
@@ -71,14 +54,14 @@ int main()
         return 0;
     }
 
-    i = i + LetterAfterFirstCoord - &str[i];
-    SkipSpace(str, &i);
+    *i = *i + LetterAfterFirstCoord - &str[*i];
+    SkipSpace(str, i);
 
-    char* LetterAfterSecondCoord = &str[i];
+    char* LetterAfterSecondCoord = &str[*i];
     double y = 0;
     y = strtod(LetterAfterSecondCoord, &LetterAfterSecondCoord);
 
-    if ((y == 0) && (LetterAfterSecondCoord == &str[i]))
+    if ((y == 0) && (LetterAfterSecondCoord == &str[*i]))
     {
         printf("Ошибка в синтаксисе: Ожидается вторая координата после первой координаты\n");
         return 0;
@@ -92,23 +75,23 @@ int main()
         return 0;
     }
 
-    i = i + LetterAfterSecondCoord - &str[i];
-    SkipSpace(str, &i);
+    *i = *i + LetterAfterSecondCoord - &str[*i];
+    SkipSpace(str, i);
 
-    if (str[i] != ',')
+    if (str[*i] != ',')
     {
         printf("Ошибка в синтаксисе: Ожидается ',' после второй координаты\n");
         return 0;
     }
 
-    i++;
-    SkipSpace(str, &i);
+    *i = *i + 1;
+    SkipSpace(str, i);
 
-    char* LetterAfterRadius = &str[i];
+    char* LetterAfterRadius = &str[*i];
     double Radius = 0;
     Radius = strtod(LetterAfterRadius, &LetterAfterRadius);
 
-    if ((Radius == 0) && (LetterAfterRadius == &str[i]))
+    if ((Radius == 0) && (LetterAfterRadius == &str[*i]))
     {
         printf("Ошибка в синтаксисе: Ожидается радиус после ','\n");
         return 0;
@@ -128,20 +111,20 @@ int main()
         return 0;
     }
 
-    i = i + LetterAfterRadius - &str[i];
-    SkipSpace(str, &i);
+    *i = *i + LetterAfterRadius - &str[*i];
+    SkipSpace(str, i);
 
-    if (str[i] != ')')
+    if (str[*i] != ')')
     {
         printf("Ошибка в синтаксисе: Ожидается ')' после радиуса\n");
         return 0;
     }
 
-    i++;
+    *i = *i + 1;
 
-    SkipSpace(str, &i);
+    SkipSpace(str, i);
 
-    if (str + i != str + strlen(str))
+    if (str + *i != str + strlen(str))
     {
         printf("Ошибка в синтаксисе: ожидается 'символ конца строки' после ')'\n");
         return 0;
@@ -149,6 +132,35 @@ int main()
     else
     {
         printf("Данные введены верно\n");
+    }
+    k++;
+    return k;
+}
+
+int main()
+{
+    int N = 50;
+    char str[N];
+    int i = 0, CheckingForCorrectness = 0;
+    // int CoordXForCircles[N];
+    // int CoordYForCircles[N];
+    // int RadiusesOfCircles[N];
+
+    //----------------Заготовка на несколько строк---------------
+    // int F;
+    // int j = 0;
+    // printf("Сколько фигур?");
+    // scanf("%d", &F);
+    // char str[N][F]
+    // for (j = 0; j < F; j++)
+    //{
+    //  fgets(str[j], N, stdin);
+    //}
+    //-----------------------------------------------------------
+
+    fgets(str, N, stdin);
+    if ((CheckingForCorrectness = CorrectWritingCircle(str, &i)) == 0)
+    {
         return 0;
     }
 }
