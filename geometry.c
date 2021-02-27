@@ -11,6 +11,13 @@ void SkipSpace(char* str, int* i)
     }
 }
 
+struct Circle
+{
+    int x;
+    int y;
+    int radius;
+};
+
 int CorrectWritingCircle(char* str, int* i)
 {
     char Circle[] = {"circle"};
@@ -156,9 +163,9 @@ int main()
         printf("выполнено\n");
     }
 
-    // int CoordXForCircles[N];
-    // int CoordYForCircles[N];
-    // int RadiusesOfCircles[N];
+    int CoordXForCircles[N];
+    int CoordYForCircles[N];
+    int RadiusesOfCircles[N];
     while (1)
     {
         estr = fgets(str, N, InputData);
