@@ -140,7 +140,7 @@ int main()
 {
     int N = 50;
     char str[N];
-    int i = 0, CheckingForCorrectness = 0;
+    int i = 0, CheckingForCorrectness = 0, NumberOfCurrentString = 1;
     char* estr;
 
     FILE* InputData;
@@ -168,8 +168,10 @@ int main()
         }
         if ((CheckingForCorrectness = CorrectWritingCircle(str, &i)) == -1)
         {
+            printf("Ошибка в строке №%d\n", NumberOfCurrentString);
             break;
         }
+        NumberOfCurrentString++;
     }
     printf("Закрытие файла\n");
 }
