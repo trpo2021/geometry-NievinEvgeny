@@ -1,4 +1,5 @@
 #include <ctype.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,9 +17,18 @@ struct Circle
     float x;
     float y;
     float radius;
+    float perimeter;
+    float area;
 };
 
-int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* CurrentFigure)
+void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int* CurrentCircle)
+{
+    float Radius = ArrayOfCircles[*CurrentCircle].radius;
+    ArrayOfCircles[*CurrentCircle].perimeter = 2 * M_PI * ArrayOfCircles[*CurrentCircle].radius;
+    ArrayOfCircles[*CurrentCircle].perimeter = M_PI * pow(Radius, 2);
+}
+
+int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* CurrentCircle)
 {
     char Circle[] = {"circle"};
     int LengthOfCircle = strlen(Circle);
@@ -43,15 +53,15 @@ int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* 
     SkipSpace(str, i);
 
     char* LetterAfterFirstCoord = &str[*i];
-    ArrayOfCircles[*CurrentFigure].x = strtod(LetterAfterFirstCoord, &LetterAfterFirstCoord);
+    ArrayOfCircles[*CurrentCircle].x = strtod(LetterAfterFirstCoord, &LetterAfterFirstCoord);
 
-    if ((ArrayOfCircles[*CurrentFigure].x == 0) && (LetterAfterFirstCoord == &str[*i]))
+    if ((ArrayOfCircles[*CurrentCircle].x == 0) && (LetterAfterFirstCoord == &str[*i]))
     {
         printf("Ошибка в синтаксисе: Ожидается координата после '('\n");
         return -1;
     }
 
-    printf("%f\n", ArrayOfCircles[*CurrentFigure].x);
+    printf("%f\n", ArrayOfCircles[*CurrentCircle].x);
 
     if (*LetterAfterFirstCoord != ' ')
     {
@@ -63,15 +73,15 @@ int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* 
     SkipSpace(str, i);
 
     char* LetterAfterSecondCoord = &str[*i];
-    ArrayOfCircles[*CurrentFigure].y = strtod(LetterAfterSecondCoord, &LetterAfterSecondCoord);
+    ArrayOfCircles[*CurrentCircle].y = strtod(LetterAfterSecondCoord, &LetterAfterSecondCoord);
 
-    if ((ArrayOfCircles[*CurrentFigure].y == 0) && (LetterAfterSecondCoord == &str[*i]))
+    if ((ArrayOfCircles[*CurrentCircle].y == 0) && (LetterAfterSecondCoord == &str[*i]))
     {
         printf("Ошибка в синтаксисе: Ожидается вторая координата после первой координаты\n");
         return -1;
     }
 
-    printf("%f\n", ArrayOfCircles[*CurrentFigure].y);
+    printf("%f\n", ArrayOfCircles[*CurrentCircle].y);
 
     if ((*LetterAfterSecondCoord != ' ') && (*LetterAfterSecondCoord != ','))
     {
@@ -92,21 +102,21 @@ int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* 
     SkipSpace(str, i);
 
     char* LetterAfterRadius = &str[*i];
-    ArrayOfCircles[*CurrentFigure].radius = strtod(LetterAfterRadius, &LetterAfterRadius);
+    ArrayOfCircles[*CurrentCircle].radius = strtod(LetterAfterRadius, &LetterAfterRadius);
 
-    if ((ArrayOfCircles[*CurrentFigure].radius == 0) && (LetterAfterRadius == &str[*i]))
+    if ((ArrayOfCircles[*CurrentCircle].radius == 0) && (LetterAfterRadius == &str[*i]))
     {
         printf("Ошибка в синтаксисе: Ожидается радиус после ','\n");
         return -1;
     }
 
-    if (ArrayOfCircles[*CurrentFigure].radius < 0)
+    if (ArrayOfCircles[*CurrentCircle].radius < 0)
     {
         printf("Ошибка: Радиус не может быть отрицательным\n");
         return -1;
     }
 
-    printf("%f\n", ArrayOfCircles[*CurrentFigure].radius);
+    printf("%f\n", ArrayOfCircles[*CurrentCircle].radius);
 
     if ((*LetterAfterRadius != ' ') && (*LetterAfterRadius != ')'))
     {
@@ -145,7 +155,8 @@ int main()
     int NumberOfSymbolsInString = 50;
     int NumberOfStrings = 10;
     char str[NumberOfSymbolsInString];
-    int i = 0, CheckingForCorrectness = 0, NumberOfCurrentString = 1, NumberOfCurrentFigure = 0;
+    int i = 0, CheckingForCorrectness = 0;
+    int NumberOfCurrentString = 1, NumberOfCurrentCircle = 0;
     char* estr;
     struct Circle Circles[NumberOfStrings];
 
@@ -176,14 +187,14 @@ int main()
             break;
         }
 
-        if ((CheckingForCorrectness = CorrectWritingCircle(str, &i, Circles, &NumberOfCurrentFigure)) == -1)
+        if ((CheckingForCorrectness = CorrectWritingCircle(str, &i, Circles, &NumberOfCurrentCircle)) == -1)
         {
             printf("Ошибка в строке №%d\n", NumberOfCurrentString);
             break;
         }
 
         NumberOfCurrentString++;
-        NumberOfCurrentFigure++;
+        NumberOfCurrentCircle++;
     }
     printf("Закрытие файла\n");
 }
