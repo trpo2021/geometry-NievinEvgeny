@@ -25,7 +25,7 @@ void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int* CurrentCircle
 {
     float Radius = ArrayOfCircles[*CurrentCircle].radius;
     ArrayOfCircles[*CurrentCircle].perimeter = 2 * M_PI * ArrayOfCircles[*CurrentCircle].radius;
-    ArrayOfCircles[*CurrentCircle].perimeter = M_PI * pow(Radius, 2);
+    ArrayOfCircles[*CurrentCircle].area = M_PI * pow(Radius, 2);
 }
 
 int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* CurrentCircle)
@@ -144,7 +144,7 @@ int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* 
     }
     else
     {
-        printf("Данные введены верно, переход к новой строке...\n");
+        printf("Данные введены верно\n");
     }
     *i = 0;
     return 0;
@@ -192,7 +192,10 @@ int main()
             printf("Ошибка в строке №%d\n", NumberOfCurrentString);
             break;
         }
-
+        PerimeterAndAreaOfACircle(Circles, &NumberOfCurrentCircle);
+        printf("%f\n", Circles[NumberOfCurrentCircle].perimeter);
+        printf("%f\n", Circles[NumberOfCurrentCircle].area);
+        printf("\n");
         NumberOfCurrentString++;
         NumberOfCurrentCircle++;
     }
