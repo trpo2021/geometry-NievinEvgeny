@@ -142,6 +142,22 @@ int main()
     int N = 50;
     char str[N];
     int i = 0, CheckingForCorrectness = 0;
+    char* estr;
+
+    FILE* InputData;
+    printf("Открытие файла: ");
+    InputData = fopen("input.txt", "r");
+    if (InputData == NULL)
+    {
+        printf("ошибка\n");
+        return 0;
+    }
+    else
+    {
+        printf("выполнено\n");
+    }
+    printf("Считаны строки:\n");
+
     // int CoordXForCircles[N];
     // int CoordYForCircles[N];
     // int RadiusesOfCircles[N];
@@ -158,7 +174,7 @@ int main()
     //}
     //-----------------------------------------------------------
 
-    fgets(str, N, stdin);
+    fgets(str, N, InputData);
     if ((CheckingForCorrectness = CorrectWritingCircle(str, &i)) == 0)
     {
         return 0;
