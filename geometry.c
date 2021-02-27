@@ -164,16 +164,24 @@ int main()
 
     while (1)
     {
+        if (NumberOfCurrentString == NumberOfStrings)
+        {
+            printf("Превышено количество строк, максимум: %d\n", NumberOfStrings);
+            break;
+        }
+
         estr = fgets(str, NumberOfSymbolsInString, InputData);
         if (estr == NULL)
         {
             break;
         }
+
         if ((CheckingForCorrectness = CorrectWritingCircle(str, &i, Circles, &NumberOfCurrentFigure)) == -1)
         {
             printf("Ошибка в строке №%d\n", NumberOfCurrentString);
             break;
         }
+
         NumberOfCurrentString++;
         NumberOfCurrentFigure++;
     }
