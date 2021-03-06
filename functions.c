@@ -17,17 +17,6 @@ void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int* CurrentCircle
 
 int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* CurrentCircle)
 {
-    char Circle[] = {"circle"};
-    int LengthOfCircle = strlen(Circle);
-    SkipSpace(str, i);
-
-    if (strncmp(&str[*i], Circle, LengthOfCircle) != 0)
-    {
-        printf("Ошибка в имени фигуры: Ожидается 'circle'\n");
-        return -1;
-    }
-
-    *i = *i + LengthOfCircle;
     SkipSpace(str, i);
 
     if (str[*i] != '(')
@@ -140,17 +129,7 @@ int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* 
 int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles, int* CurrentTriangle)
 {
     int CurrentXCoord = 0, CurrentYCoord = 0;
-    char Triangle[] = {"triangle"};
-    int LengthOfTriangle = strlen(Triangle);
-    SkipSpace(str, i);
 
-    if (strncmp(&str[*i], Triangle, LengthOfTriangle) != 0)
-    {
-        printf("Ошибка в имени фигуры: Ожидается 'triangle'\n");
-        return -1;
-    }
-
-    *i = *i + LengthOfTriangle;
     SkipSpace(str, i);
 
     if (str[*i] != '(')

@@ -4,15 +4,14 @@ int main()
 {
     int NumberOfStrings = 10, NumberOfSymbolsInString = 100;
     char str[NumberOfSymbolsInString];
-    int i = 0, CheckingForCorrectness = 0;
+    int i = 0;
     int NumberOfCurrentString = 1, NumberOfCurrentCircle = 0, NumberOfCurrentTriangle = 0;
-    char* estr;
     struct Circle Circles[NumberOfStrings];
+    char Circle[] = {"circle"};
+    int LengthOfCircle = strlen(Circle);
     struct Triangle Triangles[NumberOfStrings];
     char Triangle[] = {"triangle"};
     int LengthOfTriangle = strlen(Triangle);
-    char Circle[] = {"circle"};
-    int LengthOfCircle = strlen(Circle);
 
     FILE* InputData;
     printf("Открытие файла: ");
@@ -35,18 +34,19 @@ int main()
             break;
         }
 
-        estr = fgets(str, NumberOfSymbolsInString, InputData);
-        if (estr == NULL)
+        if (fgets(str, NumberOfSymbolsInString, InputData) == NULL)
         {
             break;
         }
 
-        SkipSpace(estr, &i);
+        SkipSpace(str, &i);
 
-        if (strncmp(estr, Circle, LengthOfCircle) == 0)
+        if (strncmp(&str[i], Circle, LengthOfCircle) == 0)
         {
-            if ((CheckingForCorrectness = CorrectWritingCircle(str, &i, Circles, &NumberOfCurrentCircle)) == -1)
+            i = i + LengthOfCircle;
+            if (CorrectWritingCircle(str, &i, Circles, &NumberOfCurrentCircle) == -1)
             {
+                i = 0;
                 printf("Ошибка в строке №%d\n", NumberOfCurrentString);
                 break;
             }
@@ -56,16 +56,16 @@ int main()
             NumberOfCurrentCircle++;
         }
 
-        if (strncmp(estr, Triangle, LengthOfTriangle) == 0)
+        if (strncmp(&str[i], Triangle, LengthOfTriangle) == 0)
         {
-            if ((CheckingForCorrectness = CorrectWritingTriangle(str, &i, Triangles, &NumberOfCurrentTriangle)) == -1)
+            i = i + LengthOfTriangle;
+            if (CorrectWritingTriangle(str, &i, Triangles, &NumberOfCurrentTriangle) == -1)
             {
+                i = 0;
                 printf("Ошибка в строке №%d\n", NumberOfCurrentString);
                 break;
             }
-            NumberOfCurrentTriangle++;
         }
-
         NumberOfCurrentString++;
     }
     printf("Закрытие файла\n");
