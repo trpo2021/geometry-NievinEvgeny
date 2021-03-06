@@ -59,12 +59,6 @@ int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* 
 
     printf("%f\n", ArrayOfCircles[*CurrentCircle].y);
 
-    if ((*LetterAfterSecondCoord != ' ') && (*LetterAfterSecondCoord != ','))
-    {
-        printf("Ошибка в синтаксисе: Ожидается ' ' или ',' после второй координаты\n");
-        return -1;
-    }
-
     *i = *i + LetterAfterSecondCoord - &str[*i];
     SkipSpace(str, i);
 
@@ -93,12 +87,6 @@ int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* 
     }
 
     printf("%f\n", ArrayOfCircles[*CurrentCircle].radius);
-
-    if ((*LetterAfterRadius != ' ') && (*LetterAfterRadius != ')'))
-    {
-        printf("Ошибка в синтаксисе: Ожидается ' ' или ')' после радиуса\n");
-        return -1;
-    }
 
     *i = *i + LetterAfterRadius - &str[*i];
     SkipSpace(str, i);
@@ -148,9 +136,15 @@ int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles,
         LetterAfterCoord = &str[*i];
         ArrayOfTriangles[*CurrentTriangle].x[CurrentCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
 
-        if ((ArrayOfTriangles[*CurrentTriangle].x[CurrentCoord] == 0) && (LetterAfterCoord == &str[*i]))
+        if ((ArrayOfTriangles[*CurrentTriangle].x[CurrentCoord] == 0) && (LetterAfterCoord == &str[*i]) && (CurrentCoord == 0))
         {
             printf("Ошибка в синтаксисе: Ожидается %d-я X координата после '('\n", CurrentCoord + 1);
+            return -1;
+        }
+
+        if ((ArrayOfTriangles[*CurrentTriangle].x[CurrentCoord] == 0) && (LetterAfterCoord == &str[*i]) && (CurrentCoord != 0))
+        {
+            printf("Ошибка в синтаксисе: Ожидается %d-я X координата после %d-й ','\n", CurrentCoord + 1, CurrentCoord);
             return -1;
         }
 
@@ -182,7 +176,7 @@ int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles,
         {
             if ((*LetterAfterCoord != ' ') && (*LetterAfterCoord != ','))
             {
-                printf("Ошибка в синтаксисе: Ожидается ' ' или ',' после после %d-й Y координаты\n", CurrentCoord + 1);
+                printf("Ошибка в синтаксисе: Ожидается ' ' или ',' после %d-й Y координаты\n", CurrentCoord + 1);
                 return -1;
             }
             *i = *i + 1;
