@@ -128,7 +128,9 @@ int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* 
 
 int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles, int* CurrentTriangle)
 {
-    int CurrentXCoord = 0, CurrentYCoord = 0;
+    int NumberOfCoordinatePairs = 4;
+    int CurrentCoord = 0;
+    char* LetterAfterCoord;
 
     SkipSpace(str, i);
 
@@ -141,178 +143,52 @@ int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles,
     *i = *i + 1;
     SkipSpace(str, i);
 
-    char* LetterAfterCoord = &str[*i];
-    ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
-
-    if ((ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord] == 0) && (LetterAfterCoord == &str[*i]))
+    while (CurrentCoord < NumberOfCoordinatePairs)
     {
-        printf("Ошибка в синтаксисе: Ожидается %d-я X координата после '('\n", CurrentXCoord + 1);
-        return -1;
+        LetterAfterCoord = &str[*i];
+        ArrayOfTriangles[*CurrentTriangle].x[CurrentCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
+
+        if ((ArrayOfTriangles[*CurrentTriangle].x[CurrentCoord] == 0) && (LetterAfterCoord == &str[*i]))
+        {
+            printf("Ошибка в синтаксисе: Ожидается %d-я X координата после '('\n", CurrentCoord + 1);
+            return -1;
+        }
+
+        *i = *i + LetterAfterCoord - &str[*i];
+        SkipSpace(str, i);
+
+        printf("%f\n", ArrayOfTriangles[*CurrentTriangle].x[CurrentCoord]);
+
+        if (*LetterAfterCoord != ' ')
+        {
+            printf("Ошибка в синтаксисе: Ожидается ' ' после %d-й X координаты\n", CurrentCoord + 1);
+            return -1;
+        }
+
+        LetterAfterCoord = &str[*i];
+        ArrayOfTriangles[*CurrentTriangle].y[CurrentCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
+
+        if ((ArrayOfTriangles[*CurrentTriangle].y[CurrentCoord] == 0) && (LetterAfterCoord == &str[*i]))
+        {
+            printf("Ошибка в синтаксисе: Ожидается %d-я Y координата после %d-й X координаты\n", CurrentCoord + 1, CurrentCoord + 1);
+            return -1;
+        }
+
+        *i = *i + LetterAfterCoord - &str[*i];
+        SkipSpace(str, i);
+
+        printf("%f\n", ArrayOfTriangles[*CurrentTriangle].y[CurrentCoord]);
+        if (CurrentCoord < NumberOfCoordinatePairs - 1)
+        {
+            if ((*LetterAfterCoord != ' ') && (*LetterAfterCoord != ','))
+            {
+                printf("Ошибка в синтаксисе: Ожидается ' ' или ',' после после %d-й Y координаты\n", CurrentCoord + 1);
+                return -1;
+            }
+            *i = *i + 1;
+        }
+        CurrentCoord++;
     }
-
-    *i = *i + LetterAfterCoord - &str[*i];
-    SkipSpace(str, i);
-
-    printf("%f\n", ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord]);
-
-    if (*LetterAfterCoord != ' ')
-    {
-        printf("Ошибка в синтаксисе: Ожидается ' ' после %d-й X координаты\n", CurrentXCoord + 1);
-        return -1;
-    }
-
-    CurrentXCoord++;
-
-    LetterAfterCoord = &str[*i];
-    ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
-
-    if ((ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord] == 0) && (LetterAfterCoord == &str[*i]))
-    {
-        printf("Ошибка в синтаксисе: Ожидается %d-я Y координата после %d-й X координаты\n", CurrentYCoord + 1, CurrentXCoord);
-        return -1;
-    }
-
-    *i = *i + LetterAfterCoord - &str[*i];
-    SkipSpace(str, i);
-
-    printf("%f\n", ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord]);
-
-    if ((*LetterAfterCoord != ' ') && (*LetterAfterCoord != ','))
-    {
-        printf("Ошибка в синтаксисе: Ожидается ' ' или ',' после после %d-й Y координаты\n", CurrentYCoord + 1);
-        return -1;
-    }
-
-    CurrentYCoord++;
-    *i = *i + 1;
-
-    LetterAfterCoord = &str[*i];
-    ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
-
-    if ((ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord] == 0) && (LetterAfterCoord == &str[*i]))
-    {
-        printf("Ошибка в синтаксисе: Ожидается %d-я X координата после '('\n", CurrentXCoord + 1);
-        return -1;
-    }
-
-    *i = *i + LetterAfterCoord - &str[*i];
-    SkipSpace(str, i);
-
-    printf("%f\n", ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord]);
-
-    if (*LetterAfterCoord != ' ')
-    {
-        printf("Ошибка в синтаксисе: Ожидается ' ' после %d-й X координаты\n", CurrentXCoord + 1);
-        return -1;
-    }
-
-    CurrentXCoord++;
-
-    LetterAfterCoord = &str[*i];
-    ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
-
-    if ((ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord] == 0) && (LetterAfterCoord == &str[*i]))
-    {
-        printf("Ошибка в синтаксисе: Ожидается %d-я Y координата после %d-й X координаты\n", CurrentYCoord + 1, CurrentXCoord);
-        return -1;
-    }
-
-    *i = *i + LetterAfterCoord - &str[*i];
-    SkipSpace(str, i);
-
-    printf("%f\n", ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord]);
-
-    if ((*LetterAfterCoord != ' ') && (*LetterAfterCoord != ','))
-    {
-        printf("Ошибка в синтаксисе: Ожидается ' ' или ',' после после %d-й Y координаты\n", CurrentYCoord + 1);
-        return -1;
-    }
-
-    CurrentYCoord++;
-    *i = *i + 1;
-
-    LetterAfterCoord = &str[*i];
-    ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
-
-    if ((ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord] == 0) && (LetterAfterCoord == &str[*i]))
-    {
-        printf("Ошибка в синтаксисе: Ожидается %d-я X координата после '('\n", CurrentXCoord + 1);
-        return -1;
-    }
-
-    *i = *i + LetterAfterCoord - &str[*i];
-    SkipSpace(str, i);
-
-    printf("%f\n", ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord]);
-
-    if (*LetterAfterCoord != ' ')
-    {
-        printf("Ошибка в синтаксисе: Ожидается ' ' после %d-й X координаты\n", CurrentXCoord + 1);
-        return -1;
-    }
-
-    CurrentXCoord++;
-
-    LetterAfterCoord = &str[*i];
-    ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
-
-    if ((ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord] == 0) && (LetterAfterCoord == &str[*i]))
-    {
-        printf("Ошибка в синтаксисе: Ожидается %d-я Y координата после %d-й X координаты\n", CurrentYCoord + 1, CurrentXCoord);
-        return -1;
-    }
-
-    *i = *i + LetterAfterCoord - &str[*i];
-    SkipSpace(str, i);
-
-    printf("%f\n", ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord]);
-
-    if ((*LetterAfterCoord != ' ') && (*LetterAfterCoord != ','))
-    {
-        printf("Ошибка в синтаксисе: Ожидается ' ' или ',' после после %d-й Y координаты\n", CurrentYCoord + 1);
-        return -1;
-    }
-
-    CurrentYCoord++;
-    *i = *i + 1;
-
-    LetterAfterCoord = &str[*i];
-    ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
-
-    if ((ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord] == 0) && (LetterAfterCoord == &str[*i]))
-    {
-        printf("Ошибка в синтаксисе: Ожидается %d-я X координата после '('\n", CurrentXCoord + 1);
-        return -1;
-    }
-
-    *i = *i + LetterAfterCoord - &str[*i];
-    SkipSpace(str, i);
-
-    printf("%f\n", ArrayOfTriangles[*CurrentTriangle].x[CurrentXCoord]);
-
-    if (*LetterAfterCoord != ' ')
-    {
-        printf("Ошибка в синтаксисе: Ожидается ' ' после %d-й X координаты\n", CurrentXCoord + 1);
-        return -1;
-    }
-
-    CurrentXCoord++;
-
-    LetterAfterCoord = &str[*i];
-    ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord] = strtod(LetterAfterCoord, &LetterAfterCoord);
-
-    if ((ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord] == 0) && (LetterAfterCoord == &str[*i]))
-    {
-        printf("Ошибка в синтаксисе: Ожидается %d-я Y координата после %d-й X координаты\n", CurrentYCoord + 1, CurrentXCoord);
-        return -1;
-    }
-
-    *i = *i + LetterAfterCoord - &str[*i];
-    SkipSpace(str, i);
-
-    printf("%f\n", ArrayOfTriangles[*CurrentTriangle].y[CurrentYCoord]);
-
-    CurrentYCoord++;
 
     if (str[*i] != ')')
     {
