@@ -65,6 +65,7 @@ int main()
                 printf("Ошибка в строке №%d\n", NumberOfCurrentString);
                 break;
             }
+            NumberOfCurrentTriangle++;
         }
         NumberOfCurrentString++;
     }
