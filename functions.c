@@ -226,7 +226,7 @@ int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles,
     }
     else
     {
-        printf("Данные введены верно\n\n");
+        printf("Данные введены верно\n");
     }
     *i = 0;
     return 0;

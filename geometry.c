@@ -4,7 +4,7 @@ int main()
 {
     int NumberOfStrings = 10, NumberOfSymbolsInString = 100;
     char str[NumberOfSymbolsInString];
-    int i = 0;
+    int i = 0, IsThatAFigure;
     int NumberOfCurrentString = 1, NumberOfCurrentCircle = 0, NumberOfCurrentTriangle = 0;
     struct Circle Circles[NumberOfStrings];
     char Circle[] = {"circle"};
@@ -41,7 +41,7 @@ int main()
 
         SkipSpace(str, &i);
 
-        if (strncmp(&str[i], Circle, LengthOfCircle) == 0)
+        if ((IsThatAFigure = strncmp(&str[i], Circle, LengthOfCircle)) == 0)
         {
             i = i + LengthOfCircle;
             if (CorrectWritingCircle(str, &i, Circles, &NumberOfCurrentCircle) == -1)
@@ -51,12 +51,12 @@ int main()
                 break;
             }
             PerimeterAndAreaOfACircle(Circles, &NumberOfCurrentCircle);
-            printf("%f\n", Circles[NumberOfCurrentCircle].perimeter);
-            printf("%f\n\n", Circles[NumberOfCurrentCircle].area);
+            printf("Периметр = %f\n", Circles[NumberOfCurrentCircle].perimeter);
+            printf("Площадь = %f\n\n", Circles[NumberOfCurrentCircle].area);
             NumberOfCurrentCircle++;
         }
 
-        if (strncmp(&str[i], Triangle, LengthOfTriangle) == 0)
+        if ((IsThatAFigure = strncmp(&str[i], Triangle, LengthOfTriangle)) == 0)
         {
             i = i + LengthOfTriangle;
             if (CorrectWritingTriangle(str, &i, Triangles, &NumberOfCurrentTriangle) == -1)
@@ -66,10 +66,11 @@ int main()
                 break;
             }
             PerimeterAndAreaOfATriangle(Triangles, &NumberOfCurrentTriangle);
-            printf("%f\n", Triangles[NumberOfCurrentTriangle].perimeter);
-            printf("%f\n\n", Triangles[NumberOfCurrentTriangle].area);
+            printf("Периметр = %f\n", Triangles[NumberOfCurrentTriangle].perimeter);
+            printf("Площадь = %f\n\n", Triangles[NumberOfCurrentTriangle].area);
             NumberOfCurrentTriangle++;
         }
+
         NumberOfCurrentString++;
     }
     printf("Закрытие файла\n");
