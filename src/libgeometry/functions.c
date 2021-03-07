@@ -1,4 +1,4 @@
-#include "../libgeometry/geometry.h"
+#include "geometry.h"
 
 void SkipSpace(char* str, int* i)
 {

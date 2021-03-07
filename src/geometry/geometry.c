@@ -1,4 +1,4 @@
-#include "geometry.h"
+#include "../libgeometry/geometry.h"
 
 int main()
 {
@@ -66,6 +66,11 @@ int main()
                 break;
             }
             PerimeterAndAreaOfATriangle(Triangles, &NumberOfCurrentTriangle);
+            if (Triangles[NumberOfCurrentTriangle].area == 0)
+            {
+                printf("Ошибка: вершины треугольника находятся на одной прямой\n");
+                break;
+            }
             printf("Периметр = %f\n", Triangles[NumberOfCurrentTriangle].perimeter);
             printf("Площадь = %f\n\n", Triangles[NumberOfCurrentTriangle].area);
             NumberOfCurrentTriangle++;
