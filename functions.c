@@ -184,6 +184,13 @@ int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles,
         CurrentCoord++;
     }
 
+    if ((ArrayOfTriangles[*CurrentTriangle].x[NumberOfCoordinatePairs - 4] != ArrayOfTriangles[*CurrentTriangle].x[NumberOfCoordinatePairs - 1])
+        || (ArrayOfTriangles[*CurrentTriangle].y[NumberOfCoordinatePairs - 4] != ArrayOfTriangles[*CurrentTriangle].y[NumberOfCoordinatePairs - 1]))
+    {
+        printf("Первая координата не соответствует последней -> треугольник не замыкается\n");
+        return -1;
+    }
+
     if (str[*i] != ')')
     {
         printf("Ошибка в синтаксисе: Ожидается ')' после последней координаты\n");
