@@ -1,16 +1,47 @@
-all: geometry
+APP_NAME = geometry
+LIB_NAME = libgeometry
 
-geometry: functions.o geometry.o
-		gcc -Wall -Wextra -Werror -MMD -o geometry functions.o geometry.o -lm
+CFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -I src -MP -MMD
+LDFLAGS =
+LDLIBS =
 
-functions.o: functions.c
-		gcc -Wall -Wextra -Werror -MMD -c functions.c -lm
+BIN_DIR = bin
+OBJ_DIR = obj
+SRC_DIR = src
 
-geometry.o: geometry.c
-		gcc -Wall -Wextra -Werror -MMD -c geometry.c -lm
+APP_PATH = $(BIN_DIR)/$(APP_NAME)
+LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).a
 
--include geometry.d hello.d
+SRC_EXT = c
+
+APP_SOURCES = $(shell find $(SRC_DIR)/$(APP_NAME) -name '*.$(SRC_EXT)')
+APP_OBJECTS = $(APP_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
+
+LIB_SOURCES = $(shell find $(SRC_DIR)/$(LIB_NAME) -name '*.$(SRC_EXT)')
+LIB_OBJECTS = $(LIB_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
+
+DEPS = $(APP_OBJECTS:.o=.d) $(LIB_OBJECTS:.o=.d)
+
+.PHONY: all
+all: $(APP_PATH)
+
+-include $(DEPS)
+
+$(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS) -lm
+
+$(LIB_PATH): $(LIB_OBJECTS)
+	ar rcs $@ $^
+
+$(OBJ_DIR)/$(SRC_DIR)/$(APP_NAME)/%.o: $(SRC_DIR)/$(APP_NAME)/%.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@ -lm
+
+$(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/%.o: $(SRC_DIR)/$(LIB_NAME)/%.c
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@ -lm
 
 .PHONY: clean
 clean:
-		rm *.d *.o geometry
+	$(RM) $(APP_PATH) $(LIB_PATH)
+	find $(OBJ_DIR) -name '*.o' -exec $(RM) '{}' \;
+	find $(OBJ_DIR) -name '*.d' -exec $(RM) '{}' \;
