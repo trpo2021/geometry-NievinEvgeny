@@ -26,6 +26,8 @@ struct Triangle
 
 void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int* CurrentCircle);
 
+void PerimeterAndAreaOfATriangle(struct Triangle* ArrayOfTriangles, int* CurrentTriangle);
+
 int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* CurrentCircle);
 
 int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles, int* CurrentTriangle);

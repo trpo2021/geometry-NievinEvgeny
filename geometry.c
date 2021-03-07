@@ -65,6 +65,9 @@ int main()
                 printf("Ошибка в строке №%d\n", NumberOfCurrentString);
                 break;
             }
+            PerimeterAndAreaOfATriangle(Triangles, &NumberOfCurrentTriangle);
+            printf("%f\n", Triangles[NumberOfCurrentTriangle].perimeter);
+            printf("%f\n\n", Triangles[NumberOfCurrentTriangle].area);
             NumberOfCurrentTriangle++;
         }
         NumberOfCurrentString++;
