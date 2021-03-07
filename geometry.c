@@ -4,7 +4,7 @@ int main()
 {
     int NumberOfStrings = 10, NumberOfSymbolsInString = 100;
     char str[NumberOfSymbolsInString];
-    int i = 0, IsThatAFigure;
+    int i = 0, IsThatATriangle, IsThatACircle;
     int NumberOfCurrentString = 1, NumberOfCurrentCircle = 0, NumberOfCurrentTriangle = 0;
     struct Circle Circles[NumberOfStrings];
     char Circle[] = {"circle"};
@@ -41,7 +41,7 @@ int main()
 
         SkipSpace(str, &i);
 
-        if ((IsThatAFigure = strncmp(&str[i], Circle, LengthOfCircle)) == 0)
+        if ((IsThatACircle = strncmp(&str[i], Circle, LengthOfCircle)) == 0)
         {
             i = i + LengthOfCircle;
             if (CorrectWritingCircle(str, &i, Circles, &NumberOfCurrentCircle) == -1)
@@ -56,7 +56,7 @@ int main()
             NumberOfCurrentCircle++;
         }
 
-        if ((IsThatAFigure = strncmp(&str[i], Triangle, LengthOfTriangle)) == 0)
+        if ((IsThatATriangle = strncmp(&str[i], Triangle, LengthOfTriangle)) == 0)
         {
             i = i + LengthOfTriangle;
             if (CorrectWritingTriangle(str, &i, Triangles, &NumberOfCurrentTriangle) == -1)
@@ -69,6 +69,12 @@ int main()
             printf("Периметр = %f\n", Triangles[NumberOfCurrentTriangle].perimeter);
             printf("Площадь = %f\n\n", Triangles[NumberOfCurrentTriangle].area);
             NumberOfCurrentTriangle++;
+        }
+
+        if ((IsThatACircle != 0) && (IsThatATriangle != 0))
+        {
+            printf("Ошибка в строке №%d, название фигуры не соответствует 'circle' или 'triangle'\n", NumberOfCurrentString);
+            break;
         }
 
         NumberOfCurrentString++;
