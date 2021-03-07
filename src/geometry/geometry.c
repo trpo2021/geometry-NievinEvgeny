@@ -65,6 +65,11 @@ int main()
                 printf("Ошибка в строке №%d\n", NumberOfCurrentString);
                 break;
             }
+            if (Triangles[NumberOfCurrentTriangle].area == 0)
+            {
+                printf("Ошибка: вершины треугольника находятся на одной прямой\n");
+                break;
+            }
             PerimeterAndAreaOfATriangle(Triangles, &NumberOfCurrentTriangle);
             printf("Периметр = %f\n", Triangles[NumberOfCurrentTriangle].perimeter);
             printf("Площадь = %f\n\n", Triangles[NumberOfCurrentTriangle].area);
