@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void SkipSpace(char* str, int* i);
-
 struct Circle
 {
     float x;
@@ -24,6 +22,8 @@ struct Triangle
 void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int* CurrentCircle);
 
 void PerimeterAndAreaOfATriangle(struct Triangle* ArrayOfTriangles, int* CurrentTriangle);
+
+void SkipSpace(char* str, int* i);
 
 int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* CurrentCircle);
 
