@@ -19,12 +19,12 @@ struct Triangle
     float area;
 };
 
-void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int* CurrentCircle);
+void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
 
-void PerimeterAndAreaOfATriangle(struct Triangle* ArrayOfTriangles, int* CurrentTriangle);
+void PerimeterAndAreaOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
 
 void SkipSpace(char* str, int* i);
 
-int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* CurrentCircle);
+int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int CurrentCircle);
 
-int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles, int* CurrentTriangle);
+int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles, int CurrentTriangle);
