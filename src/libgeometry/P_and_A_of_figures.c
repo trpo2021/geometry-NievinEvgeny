@@ -1,4 +1,5 @@
 #include "geometry.h"
+#include <math.h>
 
 void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int* CurrentCircle)
 {

@@ -1,4 +1,6 @@
 #include "geometry.h"
+#include <ctype.h>
+#include <stdlib.h>
 
 void SkipSpace(char* str, int* i)
 {
