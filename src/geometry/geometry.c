@@ -7,11 +7,7 @@ int main()
     int i = 0, IsThatATriangle, IsThatACircle;
     int NumberOfCurrentString = 1, NumberOfCurrentCircle = 0, NumberOfCurrentTriangle = 0;
     struct Circle Circles[NumberOfStrings];
-    char Circle[] = {"circle"};
-    int LengthOfCircle = strlen(Circle);
     struct Triangle Triangles[NumberOfStrings];
-    char Triangle[] = {"triangle"};
-    int LengthOfTriangle = strlen(Triangle);
 
     FILE* InputData;
     printf("Открытие файла: ");
@@ -39,49 +35,47 @@ int main()
             break;
         }
 
-        SkipSpace(str, &i);
-
-        if ((IsThatACircle = strncmp(&str[i], Circle, LengthOfCircle)) == 0)
+        if ((IsThatACircle = CorrectWritingCircle(str, &i, Circles, NumberOfCurrentCircle)) == -1)
         {
-            i = i + LengthOfCircle;
-            if (CorrectWritingCircle(str, &i, Circles, &NumberOfCurrentCircle) == -1)
-            {
-                i = 0;
-                printf("Ошибка в строке №%d\n", NumberOfCurrentString);
-                break;
-            }
-            PerimeterAndAreaOfACircle(Circles, &NumberOfCurrentCircle);
+            printf("Ошибка в строке №%d\n", NumberOfCurrentString);
+            break;
+        }
+
+        if (IsThatACircle == 0)
+        {
+            PerimeterOfACircle(Circles, NumberOfCurrentCircle);
+            AreaOfACircle(Circles, NumberOfCurrentCircle);
+
             printf("Периметр = %f\n", Circles[NumberOfCurrentCircle].perimeter);
             printf("Площадь = %f\n\n", Circles[NumberOfCurrentCircle].area);
+
             NumberOfCurrentCircle++;
         }
 
-        if ((IsThatATriangle = strncmp(&str[i], Triangle, LengthOfTriangle)) == 0)
+        if ((IsThatATriangle = CorrectWritingTriangle(str, &i, Triangles, NumberOfCurrentTriangle)) == -1)
         {
-            i = i + LengthOfTriangle;
-            if (CorrectWritingTriangle(str, &i, Triangles, &NumberOfCurrentTriangle) == -1)
-            {
-                i = 0;
-                printf("Ошибка в строке №%d\n", NumberOfCurrentString);
-                break;
-            }
+            printf("Ошибка в строке №%d\n", NumberOfCurrentString);
+            break;
+        }
+
+        if (IsThatATriangle == 0)
+        {
+            PerimeterOfATriangle(Triangles, NumberOfCurrentTriangle);
+            AreaOfATriangle(Triangles, NumberOfCurrentTriangle);
+
             if (Triangles[NumberOfCurrentTriangle].area == 0)
             {
-                printf("Ошибка: вершины треугольника находятся на одной прямой\n");
+                printf("Ошибка: вершины треугольника совпадают или находятся на одной прямой\n");
                 break;
             }
-            PerimeterAndAreaOfATriangle(Triangles, &NumberOfCurrentTriangle);
-            if (Triangles[NumberOfCurrentTriangle].area == 0)
-            {
-                printf("Ошибка: вершины треугольника находятся на одной прямой\n");
-                break;
-            }
+
             printf("Периметр = %f\n", Triangles[NumberOfCurrentTriangle].perimeter);
             printf("Площадь = %f\n\n", Triangles[NumberOfCurrentTriangle].area);
+
             NumberOfCurrentTriangle++;
         }
 
-        if ((IsThatACircle != 0) && (IsThatATriangle != 0))
+        if ((IsThatACircle == -2) && (IsThatATriangle == -2))
         {
             printf("Ошибка в строке №%d, название фигуры не соответствует 'circle' или 'triangle'\n", NumberOfCurrentString);
             break;

@@ -1,11 +1,6 @@
 #pragma once
-#include <ctype.h>
-#include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-
-void SkipSpace(char* str, int* i);
 
 struct Circle
 {
@@ -24,10 +19,14 @@ struct Triangle
     float area;
 };
 
-void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int* CurrentCircle);
+void PerimeterOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
 
-void PerimeterAndAreaOfATriangle(struct Triangle* ArrayOfTriangles, int* CurrentTriangle);
+void AreaOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
 
-int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int* CurrentCircle);
+void PerimeterOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
 
-int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles, int* CurrentTriangle);
+void AreaOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
+
+int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int CurrentCircle);
+
+int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles, int CurrentTriangle);

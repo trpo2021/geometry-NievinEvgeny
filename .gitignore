@@ -2,3 +2,6 @@
 main.c~
 #main.c#
 *.o
+*/.keep
+obj/*
+bin/*
