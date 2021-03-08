@@ -12,6 +12,18 @@ void SkipSpace(char* str, int* i)
 
 int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int CurrentCircle)
 {
+    char Circle[] = {"circle"};
+    int LengthOfCircle = strlen(Circle);
+
+    SkipSpace(str, i);
+
+    if (strncmp(&str[*i], Circle, LengthOfCircle) != 0)
+    {
+        return -2;
+    }
+
+    *i = *i + LengthOfCircle;
+
     SkipSpace(str, i);
 
     if (str[*i] != '(')
@@ -114,6 +126,17 @@ int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles,
     int NumberOfCoordinatePairs = 4;
     int CurrentCoord = 0;
     char* LetterAfterCoord;
+    char Triangle[] = {"triangle"};
+    int LengthOfTriangle = strlen(Triangle);
+
+    SkipSpace(str, i);
+
+    if (strncmp(&str[*i], Triangle, LengthOfTriangle) != 0)
+    {
+        return -2;
+    }
+
+    *i = *i + LengthOfTriangle;
 
     SkipSpace(str, i);
 

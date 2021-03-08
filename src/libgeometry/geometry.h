@@ -27,8 +27,6 @@ void PerimeterOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle
 
 void AreaOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
 
-void SkipSpace(char* str, int* i);
-
 int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int CurrentCircle);
 
 int CorrectWritingTriangle(char* str, int* i, struct Triangle* ArrayOfTriangles, int CurrentTriangle);

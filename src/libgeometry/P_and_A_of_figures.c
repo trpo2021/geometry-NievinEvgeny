@@ -1,15 +1,15 @@
 #include "geometry.h"
 #include <math.h>
 
+void PerimeterOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle)
+{
+    ArrayOfCircles[CurrentCircle].perimeter = 2 * M_PI * ArrayOfCircles[CurrentCircle].radius;
+}
+
 void AreaOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle)
 {
     float Radius = ArrayOfCircles[CurrentCircle].radius;
     ArrayOfCircles[CurrentCircle].area = M_PI * pow(Radius, 2);
-}
-
-void PerimeterOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle)
-{
-    ArrayOfCircles[CurrentCircle].perimeter = 2 * M_PI * ArrayOfCircles[CurrentCircle].radius;
 }
 
 void PerimeterOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle)
