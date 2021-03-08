@@ -44,42 +44,52 @@ int main()
         if ((IsThatACircle = strncmp(&str[i], Circle, LengthOfCircle)) == 0)
         {
             i = i + LengthOfCircle;
+
             if (CorrectWritingCircle(str, &i, Circles, NumberOfCurrentCircle) == -1)
             {
                 i = 0;
                 printf("Ошибка в строке №%d\n", NumberOfCurrentString);
                 break;
             }
+
             PerimeterOfACircle(Circles, NumberOfCurrentCircle);
             AreaOfACircle(Circles, NumberOfCurrentCircle);
+
             printf("Периметр = %f\n", Circles[NumberOfCurrentCircle].perimeter);
             printf("Площадь = %f\n\n", Circles[NumberOfCurrentCircle].area);
+
             NumberOfCurrentCircle++;
         }
 
         if ((IsThatATriangle = strncmp(&str[i], Triangle, LengthOfTriangle)) == 0)
         {
             i = i + LengthOfTriangle;
+
             if (CorrectWritingTriangle(str, &i, Triangles, NumberOfCurrentTriangle) == -1)
             {
                 i = 0;
                 printf("Ошибка в строке №%d\n", NumberOfCurrentString);
                 break;
             }
+
             if (Triangles[NumberOfCurrentTriangle].area == 0)
             {
                 printf("Ошибка: вершины треугольника находятся на одной прямой\n");
                 break;
             }
+
             PerimeterOfATriangle(Triangles, NumberOfCurrentTriangle);
             AreaOfATriangle(Triangles, NumberOfCurrentTriangle);
+
             if (Triangles[NumberOfCurrentTriangle].area == 0)
             {
                 printf("Ошибка: вершины треугольника находятся на одной прямой\n");
                 break;
             }
+
             printf("Периметр = %f\n", Triangles[NumberOfCurrentTriangle].perimeter);
             printf("Площадь = %f\n\n", Triangles[NumberOfCurrentTriangle].area);
+
             NumberOfCurrentTriangle++;
         }
 
