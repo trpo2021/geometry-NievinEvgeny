@@ -50,7 +50,8 @@ int main()
                 printf("Ошибка в строке №%d\n", NumberOfCurrentString);
                 break;
             }
-            PerimeterAndAreaOfACircle(Circles, NumberOfCurrentCircle);
+            PerimeterOfACircle(Circles, NumberOfCurrentCircle);
+            AreaOfACircle(Circles, NumberOfCurrentCircle);
             printf("Периметр = %f\n", Circles[NumberOfCurrentCircle].perimeter);
             printf("Площадь = %f\n\n", Circles[NumberOfCurrentCircle].area);
             NumberOfCurrentCircle++;
@@ -70,7 +71,8 @@ int main()
                 printf("Ошибка: вершины треугольника находятся на одной прямой\n");
                 break;
             }
-            PerimeterAndAreaOfATriangle(Triangles, NumberOfCurrentTriangle);
+            PerimeterOfATriangle(Triangles, NumberOfCurrentTriangle);
+            AreaOfATriangle(Triangles, NumberOfCurrentTriangle);
             if (Triangles[NumberOfCurrentTriangle].area == 0)
             {
                 printf("Ошибка: вершины треугольника находятся на одной прямой\n");

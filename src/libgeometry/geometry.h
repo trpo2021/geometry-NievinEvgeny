@@ -19,9 +19,13 @@ struct Triangle
     float area;
 };
 
-void PerimeterAndAreaOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
+void PerimeterOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
 
-void PerimeterAndAreaOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
+void AreaOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
+
+void PerimeterOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
+
+void AreaOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
 
 void SkipSpace(char* str, int* i);
 
