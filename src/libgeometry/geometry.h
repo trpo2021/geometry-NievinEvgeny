@@ -18,6 +18,8 @@ struct Triangle
     float area;
 };
 
+void FindASides(struct Triangle Triangle, float* side);
+
 float PerimeterOfACircle(struct Circle Circle);
 
 float AreaOfACircle(struct Circle Circle);
