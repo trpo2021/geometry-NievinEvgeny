@@ -18,13 +18,13 @@ struct Triangle
     float area;
 };
 
-void PerimeterOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
+float PerimeterOfACircle(struct Circle Circle);
 
-void AreaOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
+float AreaOfACircle(struct Circle Circle);
 
-void PerimeterOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
+float PerimeterOfATriangle(struct Triangle Triangle);
 
-void AreaOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
+float AreaOfATriangle(struct Triangle Triangle);
 
 int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int CurrentCircle);
 

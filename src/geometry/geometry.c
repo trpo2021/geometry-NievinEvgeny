@@ -43,8 +43,8 @@ int main()
 
         if (IsThatACircle == 0)
         {
-            PerimeterOfACircle(Circles, NumberOfCurrentCircle);
-            AreaOfACircle(Circles, NumberOfCurrentCircle);
+            Circles[NumberOfCurrentCircle].perimeter = PerimeterOfACircle(Circles[NumberOfCurrentCircle]);
+            Circles[NumberOfCurrentCircle].area = AreaOfACircle(Circles[NumberOfCurrentCircle]);
 
             printf("Периметр = %f\n", Circles[NumberOfCurrentCircle].perimeter);
             printf("Площадь = %f\n\n", Circles[NumberOfCurrentCircle].area);
@@ -60,8 +60,8 @@ int main()
 
         if (IsThatATriangle == 0)
         {
-            PerimeterOfATriangle(Triangles, NumberOfCurrentTriangle);
-            AreaOfATriangle(Triangles, NumberOfCurrentTriangle);
+            Triangles[NumberOfCurrentTriangle].perimeter = PerimeterOfATriangle(Triangles[NumberOfCurrentTriangle]);
+            Triangles[NumberOfCurrentTriangle].area = AreaOfATriangle(Triangles[NumberOfCurrentTriangle]);
 
             if (Triangles[NumberOfCurrentTriangle].area == 0)
             {
