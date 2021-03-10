@@ -1,6 +1,5 @@
 #pragma once
 #include <stdio.h>
-#include <string.h>
 
 struct Circle
 {
@@ -19,13 +18,15 @@ struct Triangle
     float area;
 };
 
-void PerimeterOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
+void FindASides(struct Triangle Triangle, float* side);
 
-void AreaOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle);
+float PerimeterOfACircle(struct Circle Circle);
 
-void PerimeterOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
+float AreaOfACircle(struct Circle Circle);
 
-void AreaOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle);
+float PerimeterOfATriangle(struct Triangle Triangle);
+
+float AreaOfATriangle(struct Triangle Triangle);
 
 int CorrectWritingCircle(char* str, int* i, struct Circle* ArrayOfCircles, int CurrentCircle);
 

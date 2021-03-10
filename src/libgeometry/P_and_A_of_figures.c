@@ -1,46 +1,54 @@
 #include "geometry.h"
 #include <math.h>
 
-void PerimeterOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle)
+float PerimeterOfACircle(struct Circle Circle)
 {
-    ArrayOfCircles[CurrentCircle].perimeter = 2 * M_PI * ArrayOfCircles[CurrentCircle].radius;
+    Circle.perimeter = 2 * M_PI * Circle.radius;
+    return Circle.perimeter;
 }
 
-void AreaOfACircle(struct Circle* ArrayOfCircles, int CurrentCircle)
+float AreaOfACircle(struct Circle Circle)
 {
-    float Radius = ArrayOfCircles[CurrentCircle].radius;
-    ArrayOfCircles[CurrentCircle].area = M_PI * pow(Radius, 2);
+    float Radius = Circle.radius;
+    Circle.area = M_PI * pow(Radius, 2);
+    return Circle.area;
 }
 
-void PerimeterOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle)
+void FindASides(struct Triangle Triangle, float* side)
 {
-    int NumberOfCoords = 3, i;
+    int i;
+    int NumberOfCoords = 3;
     float x[NumberOfCoords];
     float y[NumberOfCoords];
-    float side[NumberOfCoords];
-    ArrayOfTriangles[CurrentTriangle].perimeter = 0;
     for (i = 0; i < NumberOfCoords; i++)
     {
-        x[i] = ArrayOfTriangles[CurrentTriangle].x[i + 1] - ArrayOfTriangles[CurrentTriangle].x[i];
-        y[i] = ArrayOfTriangles[CurrentTriangle].y[i + 1] - ArrayOfTriangles[CurrentTriangle].y[i];
+        x[i] = Triangle.x[i + 1] - Triangle.x[i];
+        y[i] = Triangle.y[i + 1] - Triangle.y[i];
         side[i] = sqrt((pow(x[i], 2) + pow(y[i], 2)));
-        ArrayOfTriangles[CurrentTriangle].perimeter += side[i];
     }
 }
 
-void AreaOfATriangle(struct Triangle* ArrayOfTriangles, int CurrentTriangle)
+float PerimeterOfATriangle(struct Triangle Triangle)
 {
-    int NumberOfCoords = 3, i;
-    float x[NumberOfCoords];
-    float y[NumberOfCoords];
-    float side[NumberOfCoords];
+    int i;
+    int NumberOfSides = 3;
+    float side[NumberOfSides];
+    Triangle.perimeter = 0;
+    FindASides(Triangle, side);
+    for (i = 0; i < NumberOfSides; i++)
+    {
+        Triangle.perimeter += side[i];
+    }
+    return Triangle.perimeter;
+}
+
+float AreaOfATriangle(struct Triangle Triangle)
+{
+    int NumberOfSides = 3;
+    float side[NumberOfSides];
     float p;
-    for (i = 0; i < NumberOfCoords; i++)
-    {
-        x[i] = ArrayOfTriangles[CurrentTriangle].x[i + 1] - ArrayOfTriangles[CurrentTriangle].x[i];
-        y[i] = ArrayOfTriangles[CurrentTriangle].y[i + 1] - ArrayOfTriangles[CurrentTriangle].y[i];
-        side[i] = sqrt((pow(x[i], 2) + pow(y[i], 2)));
-    }
+    FindASides(Triangle, side);
     p = (side[0] + side[1] + side[2]) / 2;
-    ArrayOfTriangles[CurrentTriangle].area = sqrt((p * (p - side[0]) * (p - side[1]) * (p - side[2])));
+    Triangle.area = sqrt((p * (p - side[0]) * (p - side[1]) * (p - side[2])));
+    return Triangle.area;
 }
